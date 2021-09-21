@@ -5,7 +5,11 @@ export default {
   mounted () {
     const url = window.location.search
     const params = new URLSearchParams(url)
-    Axios.post('http://localhost:8000/exchange_token', {
+    if (params.get('error') === 'access_denied') {
+      this.$router.push('/')
+    }
+
+    Axios.post(`${process.env.VUE_APP_API_URL}/exchange_token`, {
       fu_id: localStorage.getItem('user_id'),
       auth_code: params.get('code')
     }).then(res => {

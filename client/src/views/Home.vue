@@ -32,7 +32,7 @@ export default {
   methods: {
     onGetAthlete () {
       this.isLoading = true
-      Axios.get(`http://localhost:8000/${localStorage.getItem('user_id')}/athlete?fu_token=${localStorage.getItem('token')}`)
+      Axios.get(`${process.env.VUE_APP_API_URL}/${localStorage.getItem('user_id')}/athlete?fu_token=${localStorage.getItem('token')}`)
         .then(res => {
           this.isLoading = false
           this.athlete.push(res.data)
@@ -41,7 +41,7 @@ export default {
     },
     onGetAthleteStats () {
       this.isLoading = true
-      Axios.get(`http://localhost:8000/${localStorage.getItem('user_id')}/athlete/stats?fu_token=${localStorage.getItem('token')}`)
+      Axios.get(`${process.env.VUE_APP_API_URL}/${localStorage.getItem('user_id')}/athlete/stats?fu_token=${localStorage.getItem('token')}`)
         .then(res => {
           this.isLoading = false
           this.stats.push(res.data)

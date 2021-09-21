@@ -19,7 +19,7 @@
           <div v-if="isConnected" class="col-2">
             <div v-if="stats[0]" class="card">
               <div class="card-body">
-                <h3 class="fw-bold">{{ stats[0]?.all_run_totals.distance / 1000 }}</h3>
+                <h3 class="fw-bold">{{ stats[0]?.all_run_totals?.distance / 1000 }}</h3>
                 <p v-if="stats[0]">Distance</p>
               </div>
             </div>
@@ -33,7 +33,7 @@
           <div v-if="isConnected" class="col-2">
             <div v-if="stats[0]" class="card">
               <div class="card-body">
-                <h3 class="fw-bold">{{ stats[0]?.all_run_totals.moving_time }}</h3>
+                <h3 class="fw-bold">{{ stats[0]?.all_run_totals?.moving_time }}</h3>
                 <p v-if="stats[0]">Moving Time</p>
               </div>
             </div>
@@ -65,10 +65,10 @@ export default {
   },
   methods: {
     connect () {
-      window.location.href = 'http://www.strava.com/oauth/authorize?client_id=67714&response_type=code&redirect_uri=http://localhost:8080/exchange_token'
+      window.location.href = `http://www.strava.com/oauth/authorize?client_id=67713&response_type=code&redirect_uri=${process.env.VUE_APP_BASE_URL}/exchange_token&approval_prompt=force&scope=read,activity:read,activity:write`
     },
     disconnect () {
-      Axios.delete(`http://localhost:8000/strava/${localStorage.getItem('user_id')}`)
+      Axios.delete(`${process.env.VUE_APP_API_URL}/strava/${localStorage.getItem('user_id')}`)
         .then(res => {
           console.log(res)
           localStorage.removeItem('isConnected')

@@ -25,7 +25,6 @@ class FoUsers extends Model implements AuthenticatableContract, AuthorizableCont
     
     protected $fillable = [
       'fu_fsa_id',
-      'fu_athlete_id',
       'fu_full_name',
       'fu_email_address',
       'fu_phone',

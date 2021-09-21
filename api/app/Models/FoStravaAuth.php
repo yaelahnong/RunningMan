@@ -25,6 +25,7 @@ class FoStravaAuth extends Model implements AuthenticatableContract, Authorizabl
 
     protected $fillable = [
       'fsa_fu_id',
+      'fsa_athlete_id',
       'fsa_token_type',
       'fsa_expires_at',
       'fsa_expires_in',

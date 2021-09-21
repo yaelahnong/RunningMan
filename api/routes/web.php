@@ -25,6 +25,7 @@ $router->get('/', function () use ($router) {
 
 $router->get('/{id}/athlete', ['middleware' => 'auth', 'uses' => 'Strava\AthleteController@index']);
 $router->get('/{id}/athlete/stats', ['middleware' => 'auth', 'uses' => 'Strava\AthleteController@stats']);
+$router->get('/refresh_token/{id}', 'Strava\AthleteController@refresh_token');
 
 // strava authentication
 $router->post('/exchange_token', 'Strava\AuthorizationController@store');

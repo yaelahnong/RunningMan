@@ -13,12 +13,13 @@ class AuthorizationController extends Controller
   public function store(Request $request) {
     $client = new \GuzzleHttp\Client();
     $authCode = $request->input('auth_code');
-    $response = $client->request('POST', 'https://www.strava.com/oauth/token?client_id=67714&client_secret=b67b1cc92e62f9474665d1b411e76f4f8ba4aec3&code='. $authCode .'&grant_type=authorization_code');
+    $response = $client->request('POST', 'https://www.strava.com/oauth/token?client_id=' . env('STRAVA_CLIENT_ID') . '&client_secret=' . env('STRAVA_SECRET') . '&code='. $authCode .'&grant_type=authorization_code');
     $responseJson = json_decode($response->getBody()->getContents());
     
     try {
       $id = FoStravaAuth::create([
         'fsa_fu_id' => $request->input('fu_id'),
+        'fsa_athlete_id' => $responseJson->athlete->id,
         'fsa_token_type' => $responseJson->token_type,
         'fsa_expires_at' => $responseJson->expires_at,
         'fsa_expires_in' => $responseJson->expires_in,
@@ -28,7 +29,6 @@ class AuthorizationController extends Controller
 
       FoUsers::where('fu_id', $request->input('fu_id'))->update([
         'fu_fsa_id' => $id,
-        'fu_athlete_id' => $responseJson->athlete->id
       ]);
 
       return response()->json([

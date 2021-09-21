@@ -1,17 +1,16 @@
 <template>
-  <header>
-    <div class="container-fluid">
-      <div class="d-flex justify-content-between">
-        <h3><strong>{{ title[0] }}</strong> {{ title[1] }}</h3>
-        <a href="" @click="onHandleLogout" @click.prevent class="text-light">Logout</a>
-      </div>
+<div class="header">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between">
+      <h3><strong>{{ title[0] }}</strong> {{ title[1] }}</h3>
+      <a href="" @click="onHandleLogout" @click.prevent class="text-light">Logout</a>
     </div>
-  </header>
+  </div>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'header',
   props: {
     title: Array
   },
@@ -29,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  header {
+  .header {
     position: absolute;
     width: 100%;
     h3 {
